@@ -1,0 +1,7 @@
+.. _background:
+
+======================================
+On power grid topology representations
+======================================
+
+TODO: Copy stuff about node/breaker and bus/branch from the CIM paper

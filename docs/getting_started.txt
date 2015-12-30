@@ -1,0 +1,53 @@
+.. _getting_started:
+
+===============
+Getting Started
+===============
+
+Cim2BusBranch is ment to be a connection between `PyCIM <http://pycim.org/>`_
+and `PYPOWER <http://pypower.org>`_.
+
+It transform a dict of CIM objects into the bus/branch model which can be used
+for load flow analyses with e.g. PYPOWER (or virtually any other tool that is
+based on a bus/branch topology).
+
+Installation
+============
+
+pip install cim2busbranch
+
+
+Basic Usage
+===========
+
+A first example:
+
+    >>> import cim2busbranch, PyCIM, pypower.api as pypower
+    >>> cim_topo = PyCIM.cimread('example.rdf')
+    >>> case = cim2busbranch.transform(cim_topo)
+    >>> pypower.runpf(cim2busbranch.pypower_case(case))
+
+The examples above can be written even shorter:
+
+    >>> import cim2busbranch as c2bb, pypower.api as pypower
+    >>> pypower.runpf(c2bb.pypower_case('example.xml'))
+
+Of course, you can also do some more complex things with Cim2BusBranch. The
+next chapters cover some of the more advanced use cases.
+
+
+Limitations
+===========
+
+Cim2BusBranch is still in an early development stage and has some limitations:
+
+* No CIM profiles are supported
+* Tests have mostly been performed with some custom CIMv14 topologies, that
+  might not be really representative.
+* Branches are not yet created from power transformers
+* The same value is taken for the *rate_a*, *rate_b* and *rate_c* attributes of
+  a branch.
+* Except for the swing (or reference) bus, every bus is of the *PQ* type, no
+  matter what kind of equipment is connected to it.
+* Load or generations values for energy consumers and other primary equipment
+  defined within the CIM file are not yet taken into account.

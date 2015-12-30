@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF xmlns:cim="http://iec.ch/TC57/2009/CIM-schema-cim14#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+    <cim:BasePower rdf:ID="BasePower">
+        <cim:BasePower.basePower.value>10</cim:BasePower.basePower.value>
+        <!--cim:BasePower.basePower.multiplier>M</cim:BasePower.basePower.multiplier-->
+        <!--cim:BasePower.basePower>10</cim:BasePower.basePower-->
+    </cim:BasePower>
+    <cim:Substation rdf:ID="Transformer20kVSwingGen">
+        <cim:IdentifiedObject.mRID>Transformer20kVSwingGen</cim:IdentifiedObject.mRID>
+        <cim:Substation.VoltageLevels rdf:resource="#vl20kv"/>
+    </cim:Substation>
+    <cim:VoltageLevel rdf:ID="vl20kv">
+        <cim:IdentifiedObject.mRID>vl20kv</cim:IdentifiedObject.mRID>
+        <cim:VoltageLevel.Substation rdf:resource="#Transformer20kVSwingGen"/>
+        <cim:VoltageLevel.BaseVoltage rdf:resource="#vl20kv_BaseVoltage20.0kV"/>
+    </cim:VoltageLevel>
+    <cim:BaseVoltage rdf:ID="vl20kv_BaseVoltage20.0kV">
+        <cim:BaseVoltage.nominalVoltage.value>20.0</cim:BaseVoltage.nominalVoltage.value>
+        <!--cim:BaseVoltage.nominalVoltage.multiplier>k</cim:BaseVoltage.nominalVoltage.multiplier-->
+        <!--cim:BaseVoltage.nominalVoltage>voltage here</cim:BaseVoltage.nominalVoltage-->
+    </cim:BaseVoltage>
+
+    <cim:BusbarSection rdf:ID="Transformer20kV">
+        <cim:IdentifiedObject.mRID>Transformer20kV</cim:IdentifiedObject.mRID>
+        <cim:IdentifiedObject.aliasName>SwingBus</cim:IdentifiedObject.aliasName>
+        <cim:ConductingEquipment.Terminals rdf:resource="#Transformer20kV_T"/>
+    </cim:BusbarSection>
+    <cim:Terminal rdf:ID="Transformer20kV_T">
+        <cim:Terminal.ConductingEquipment rdf:resource="#Transformer20kV" />
+        <cim:Terminal.ConnectivityNode rdf:resource="#Transformer20kV_C" />
+        <cim:IdentifiedObject.mRID>Transformer20kV_T</cim:IdentifiedObject.mRID>
+    </cim:Terminal>
+    <cim:ConnectivityNode rdf:ID="Transformer20kV_C">
+        <cim:IdentifiedObject.mRID>Transformer20kV_C</cim:IdentifiedObject.mRID>
+        <cim:ConnectivityNode.ConnectivityNodeContainer rdf:resource="#vl20kv"/>
+        <cim:ConnectivityNode.Terminals rdf:resource="#Transformer20kV_T"/>
+        <cim:ConnectivityNode.Terminals rdf:resource="#LineA_Transformer20kV_T"/>
+        <cim:ConnectivityNode.Terminals rdf:resource="#LineB_Transformer20kV_T"/>
+    </cim:ConnectivityNode>
+    <cim:BusbarSection rdf:ID="Bus1">
+        <cim:IdentifiedObject.mRID>Bus1</cim:IdentifiedObject.mRID>
+        <cim:ConductingEquipment.Terminals rdf:resource="#Bus1_T"/>
+    </cim:BusbarSection>
+    <cim:Terminal rdf:ID="Bus1_T">
+        <cim:Terminal.ConductingEquipment rdf:resource="#Bus1" />
+        <cim:Terminal.ConnectivityNode rdf:resource="#Bus1_C" />
+        <cim:IdentifiedObject.mRID>Bus1_T</cim:IdentifiedObject.mRID>
+    </cim:Terminal>
+    <cim:ConnectivityNode rdf:ID="Bus1_C">
+        <cim:IdentifiedObject.mRID>Bus1_C</cim:IdentifiedObject.mRID>
+        <cim:ConnectivityNode.ConnectivityNodeContainer rdf:resource="#vl20kv"/>
+        <cim:ConnectivityNode.Terminals rdf:resource="#Bus1_T"/>
+        <cim:ConnectivityNode.Terminals rdf:resource="#LineA_Bus1_T"/>
+        <cim:ConnectivityNode.Terminals rdf:resource="#LineD_Bus1_T"/>
+    </cim:ConnectivityNode>
+    <cim:BusbarSection rdf:ID="Bus2">
+        <cim:IdentifiedObject.mRID>Bus2</cim:IdentifiedObject.mRID>
+        <cim:ConductingEquipment.Terminals rdf:resource="#Bus2_T"/>
+    </cim:BusbarSection>
+    <cim:Terminal rdf:ID="Bus2_T">
+        <cim:Terminal.ConductingEquipment rdf:resource="#Bus2" />
+        <cim:Terminal.ConnectivityNode rdf:resource="#Bus2_C" />
+        <cim:IdentifiedObject.mRID>Bus2_T</cim:IdentifiedObject.mRID>
+    </cim:Terminal>
+    <cim:ConnectivityNode rdf:ID="Bus2_C">
+        <cim:IdentifiedObject.mRID>Bus2_C</cim:IdentifiedObject.mRID>
+        <cim:ConnectivityNode.ConnectivityNodeContainer rdf:resource="#vl20kv"/>
+        <cim:ConnectivityNode.Terminals rdf:resource="#Bus2_T"/>
+        <cim:ConnectivityNode.Terminals rdf:resource="#LineB_Bus2_T"/>
+        <cim:ConnectivityNode.Terminals rdf:resource="#LineC_Bus2_T"/>
+    </cim:ConnectivityNode>
+    <cim:BusbarSection rdf:ID="Bus3">
+        <cim:IdentifiedObject.mRID>Bus3</cim:IdentifiedObject.mRID>
+        <cim:ConductingEquipment.Terminals rdf:resource="#Bus3_T"/>
+    </cim:BusbarSection>
+    <cim:Terminal rdf:ID="Bus3_T">
+        <cim:Terminal.ConductingEquipment rdf:resource="#Bus3" />
+        <cim:Terminal.ConnectivityNode rdf:resource="#Bus3_C" />
+        <cim:IdentifiedObject.mRID>Bus3_T</cim:IdentifiedObject.mRID>
+    </cim:Terminal>
+    <cim:ConnectivityNode rdf:ID="Bus3_C">
+        <cim:IdentifiedObject.mRID>Bus3_C</cim:IdentifiedObject.mRID>
+        <cim:ConnectivityNode.ConnectivityNodeContainer rdf:resource="#vl20kv"/>
+        <cim:ConnectivityNode.Terminals rdf:resource="#Bus3_T"/>
+        <cim:ConnectivityNode.Terminals rdf:resource="#LineC_Bus3_T"/>
+        <cim:ConnectivityNode.Terminals rdf:resource="#LineD_Bus3_T"/>
+    </cim:ConnectivityNode>
+
+    <cim:ACLineSegment rdf:ID="LineA">
+        <cim:Conductor.length.multiplier rdf:resource="http://iec.ch/TC57/2008/CIM-schema-cim13#UnitMultiplier.none"/>
+        <cim:Conductor.length.unit rdf:resource="http://iec.ch/TC57/2008/CIM-schema-cim13#UnitSymbol.m"/>
+        <cim:Conductor.length.value>5000</cim:Conductor.length.value>
+        <!--cim:Conductor.r.multiplier rdf:resource="http://iec.ch/TC57/2008/CIM-schema-cim13#UnitMultiplier.none"/-->
+        <!--cim:Conductor.r.unit rdf:resource="http://iec.ch/TC57/2008/CIM-schema-cim13#UnitSymbol.ohm"/-->
+        <cim:Conductor.r.value>0.625</cim:Conductor.r.value>
+        <!--cim:Conductor.x.multiplier rdf:resource="http://iec.ch/TC57/2008/CIM-schema-cim13#UnitMultiplier.none"/-->
+        <!--cim:Conductor.x.unit rdf:resource="http://iec.ch/TC57/2008/CIM-schema-cim13#UnitSymbol.ohm"/-->
+        <cim:Conductor.x.value>0.56</cim:Conductor.x.value>
+        <cim:ACLineSegment.bch.value>4.7123889804E-4</cim:ACLineSegment.bch.value>
+        <cim:ConductingEquipment.phases rdf:resource="http://iec.ch/TC57/2008/CIM-schema-cim13#PhaseCode.A"/>
+        <cim:ConductingEquipment.Terminals rdf:resource="#LineA_Transformer20kV_T"/>
+        <cim:ConductingEquipment.Terminals rdf:resource="#LineA_Bus1_T"/>
+        <cim:IdentifiedObject.name>LineA</cim:IdentifiedObject.name>
+        <cim:IdentifiedObject.mRID>LineA</cim:IdentifiedObject.mRID>
+    </cim:ACLineSegment>
+    <cim:Terminal rdf:ID="LineA_Transformer20kV_T">
+        <cim:Terminal.ConductingEquipment rdf:resource="#LineA" />
+        <cim:Terminal.ConnectivityNode rdf:resource="#Transformer20kV_C" />
+        <cim:IdentifiedObject.mRID>LineA_Transformer20kV_T</cim:IdentifiedObject.mRID>
+    </cim:Terminal>
+    <cim:Terminal rdf:ID="LineA_Bus1_T">
+        <cim:Terminal.ConductingEquipment rdf:resource="#LineA" />
+        <cim:Terminal.ConnectivityNode rdf:resource="#Bus1_C" />
+        <cim:IdentifiedObject.mRID>LineA_Bus1_T</cim:IdentifiedObject.mRID>
+    </cim:Terminal>
+
+    <cim:ACLineSegment rdf:ID="LineB">
+        <cim:Conductor.length.multiplier rdf:resource="http://iec.ch/TC57/2008/CIM-schema-cim13#UnitMultiplier.none"/>
+        <cim:Conductor.length.unit rdf:resource="http://iec.ch/TC57/2008/CIM-schema-cim13#UnitSymbol.m"/>
+        <cim:Conductor.length.value>3000</cim:Conductor.length.value>
+        <!--cim:Conductor.r.multiplier rdf:resource="http://iec.ch/TC57/2008/CIM-schema-cim13#UnitMultiplier.none"/-->
+        <!--cim:Conductor.r.unit rdf:resource="http://iec.ch/TC57/2008/CIM-schema-cim13#UnitSymbol.ohm"/-->
+        <cim:Conductor.r.value>0.375</cim:Conductor.r.value>
+        <!--cim:Conductor.x.multiplier rdf:resource="http://iec.ch/TC57/2008/CIM-schema-cim13#UnitMultiplier.none"/-->
+        <!--cim:Conductor.x.unit rdf:resource="http://iec.ch/TC57/2008/CIM-schema-cim13#UnitSymbol.ohm"/-->
+        <cim:Conductor.x.value>0.336</cim:Conductor.x.value>
+        <cim:ACLineSegment.bch.value>2.82743338824E-4</cim:ACLineSegment.bch.value>
+        <cim:ConductingEquipment.phases rdf:resource="http://iec.ch/TC57/2008/CIM-schema-cim13#PhaseCode.A"/>
+        <cim:ConductingEquipment.Terminals rdf:resource="#LineB_Transformer20kV_T"/>
+        <cim:ConductingEquipment.Terminals rdf:resource="#LineB_Bus2_T"/>
+        <cim:IdentifiedObject.name>LineB</cim:IdentifiedObject.name>
+        <cim:IdentifiedObject.mRID>LineB</cim:IdentifiedObject.mRID>
+    </cim:ACLineSegment>
+    <cim:Terminal rdf:ID="LineB_Transformer20kV_T">
+        <cim:Terminal.ConductingEquipment rdf:resource="#LineB" />
+        <cim:Terminal.ConnectivityNode rdf:resource="#Transformer20kV_C" />
+        <cim:IdentifiedObject.mRID>LineB_Transformer20kV_T</cim:IdentifiedObject.mRID>
+    </cim:Terminal>
+    <cim:Terminal rdf:ID="LineB_Bus2_T">
+        <cim:Terminal.ConductingEquipment rdf:resource="#LineB" />
+        <cim:Terminal.ConnectivityNode rdf:resource="#Bus2_C" />
+        <cim:IdentifiedObject.mRID>LineB_Bus2_T</cim:IdentifiedObject.mRID>
+    </cim:Terminal>
+
+    <cim:ACLineSegment rdf:ID="LineC">
+        <cim:Conductor.length.multiplier rdf:resource="http://iec.ch/TC57/2008/CIM-schema-cim13#UnitMultiplier.none"/>
+        <cim:Conductor.length.unit rdf:resource="http://iec.ch/TC57/2008/CIM-schema-cim13#UnitSymbol.m"/>
+        <cim:Conductor.length.value>300</cim:Conductor.length.value>
+        <!--cim:Conductor.r.multiplier rdf:resource="http://iec.ch/TC57/2008/CIM-schema-cim13#UnitMultiplier.none"/-->
+        <!--cim:Conductor.r.unit rdf:resource="http://iec.ch/TC57/2008/CIM-schema-cim13#UnitSymbol.ohm"/-->
+        <cim:Conductor.r.value>0.0375</cim:Conductor.r.value>
+        <!--cim:Conductor.x.multiplier rdf:resource="http://iec.ch/TC57/2008/CIM-schema-cim13#UnitMultiplier.none"/-->
+        <!--cim:Conductor.x.unit rdf:resource="http://iec.ch/TC57/2008/CIM-schema-cim13#UnitSymbol.ohm"/-->
+        <cim:Conductor.x.value>0.033600000000000005</cim:Conductor.x.value>
+        <cim:ACLineSegment.bch.value>2.82743338824E-5</cim:ACLineSegment.bch.value>
+        <cim:ConductingEquipment.phases rdf:resource="http://iec.ch/TC57/2008/CIM-schema-cim13#PhaseCode.A"/>
+        <cim:ConductingEquipment.Terminals rdf:resource="#LineC_Bus2_T"/>
+        <cim:ConductingEquipment.Terminals rdf:resource="#LineC_Bus3_T"/>
+        <cim:IdentifiedObject.name>LineC</cim:IdentifiedObject.name>
+        <cim:IdentifiedObject.mRID>LineC</cim:IdentifiedObject.mRID>
+    </cim:ACLineSegment>
+    <cim:Terminal rdf:ID="LineC_Bus2_T">
+        <cim:Terminal.ConductingEquipment rdf:resource="#LineC" />
+        <cim:Terminal.ConnectivityNode rdf:resource="#Bus2_C" />
+        <cim:IdentifiedObject.mRID>LineC_Bus2_T</cim:IdentifiedObject.mRID>
+    </cim:Terminal>
+    <cim:Terminal rdf:ID="LineC_Bus3_T">
+        <cim:Terminal.ConductingEquipment rdf:resource="#LineC" />
+        <cim:Terminal.ConnectivityNode rdf:resource="#Bus3_C" />
+        <cim:IdentifiedObject.mRID>LineC_Bus3_T</cim:IdentifiedObject.mRID>
+    </cim:Terminal>
+
+    <cim:ACLineSegment rdf:ID="LineD">
+        <cim:Conductor.length.multiplier rdf:resource="http://iec.ch/TC57/2008/CIM-schema-cim13#UnitMultiplier.none"/>
+        <cim:Conductor.length.unit rdf:resource="http://iec.ch/TC57/2008/CIM-schema-cim13#UnitSymbol.m"/>
+        <cim:Conductor.length.value>2000</cim:Conductor.length.value>
+        <!--cim:Conductor.r.multiplier rdf:resource="http://iec.ch/TC57/2008/CIM-schema-cim13#UnitMultiplier.none"/-->
+        <!--cim:Conductor.r.unit rdf:resource="http://iec.ch/TC57/2008/CIM-schema-cim13#UnitSymbol.ohm"/-->
+        <cim:Conductor.r.value>0.25</cim:Conductor.r.value>
+        <!--cim:Conductor.x.multiplier rdf:resource="http://iec.ch/TC57/2008/CIM-schema-cim13#UnitMultiplier.none"/-->
+        <!--cim:Conductor.x.unit rdf:resource="http://iec.ch/TC57/2008/CIM-schema-cim13#UnitSymbol.ohm"/-->
+        <cim:Conductor.x.value>0.224</cim:Conductor.x.value>
+        <cim:ACLineSegment.bch.value>1.88495559216E-4</cim:ACLineSegment.bch.value>
+        <cim:ConductingEquipment.phases rdf:resource="http://iec.ch/TC57/2008/CIM-schema-cim13#PhaseCode.A"/>
+        <cim:ConductingEquipment.Terminals rdf:resource="#LineD_Bus1_T"/>
+        <cim:ConductingEquipment.Terminals rdf:resource="#LineD_Bus3_T"/>
+        <cim:IdentifiedObject.name>LineD</cim:IdentifiedObject.name>
+        <cim:IdentifiedObject.mRID>LineD</cim:IdentifiedObject.mRID>
+    </cim:ACLineSegment>
+    <cim:Terminal rdf:ID="LineD_Bus1_T">
+        <cim:Terminal.ConductingEquipment rdf:resource="#LineD" />
+        <cim:Terminal.ConnectivityNode rdf:resource="#Bus1_C" />
+        <cim:IdentifiedObject.mRID>LineD_Bus1_T</cim:IdentifiedObject.mRID>
+    </cim:Terminal>
+    <cim:Terminal rdf:ID="LineD_Bus3_T">
+        <cim:Terminal.ConductingEquipment rdf:resource="#LineD" />
+        <cim:Terminal.ConnectivityNode rdf:resource="#Bus3_C" />
+        <cim:IdentifiedObject.mRID>LineD_Bus3_T</cim:IdentifiedObject.mRID>
+    </cim:Terminal>
+</rdf:RDF>

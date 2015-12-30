@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF xmlns:cim="http://iec.ch/TC57/2009/CIM-schema-cim14#"
+        xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+
+    <cim:BasePower rdf:ID="BasePower">
+        <!--cim:BasePower.basePower.value>10</cim:BasePower.basePower.value>
+        <cim:BasePower.basePower.multiplier>M</cim:BasePower.basePower.multiplier-->
+        <cim:BasePower.basePower>10</cim:BasePower.basePower>
+    </cim:BasePower>
+    <cim:Substation rdf:ID="Substation">
+        <cim:IdentifiedObject.mRID>Substation</cim:IdentifiedObject.mRID>
+        <cim:Substation.VoltageLevels rdf:resource="#VoltageLevel20kV"/>
+    </cim:Substation>
+    <cim:VoltageLevel rdf:ID="VoltageLevel20kV">
+        <cim:IdentifiedObject.mRID>VoltageLevel20kV</cim:IdentifiedObject.mRID>
+        <cim:VoltageLevel.Substation rdf:resource="#Substation"/>
+        <cim:VoltageLevel.BaseVoltage rdf:resource="#BaseVoltage20kV"/>
+    </cim:VoltageLevel>
+    <cim:BaseVoltage rdf:ID="BaseVoltage20kV">
+        <!--cim:BaseVoltage.nominalVoltage.value>20</cim:BaseVoltage.nominalVoltage.value>
+        <cim:BaseVoltage.nominalVoltage.multiplier>k</cim:BaseVoltage.nominalVoltage.multiplier-->
+        <cim:BaseVoltage.nominalVoltage>20</cim:BaseVoltage.nominalVoltage>
+    </cim:BaseVoltage>
+
+    <cim:PositionPoint rdf:ID="Transformer20kV_P">
+        <cim:PositionPoint.xPosition>0</cim:PositionPoint.xPosition>
+        <cim:PositionPoint.yPosition>2</cim:PositionPoint.yPosition>
+    </cim:PositionPoint>
+    <cim:Location rdf:ID="Transformer20kV_L">
+        <cim:Location.PositionPoints rdf:resource="#Transformer20kV_P"/>
+    </cim:Location>
+    <cim:PositionPoint rdf:ID="Bus1_P">
+        <cim:PositionPoint.xPosition>5</cim:PositionPoint.xPosition>
+        <cim:PositionPoint.yPosition>2</cim:PositionPoint.yPosition>
+    </cim:PositionPoint>
+    <cim:Location rdf:ID="Bus1_L">
+        <cim:Location.PositionPoints rdf:resource="#Bus1_P"/>
+    </cim:Location>
+    <cim:PositionPoint rdf:ID="Bus2_P">
+        <cim:PositionPoint.xPosition>1</cim:PositionPoint.xPosition>
+        <cim:PositionPoint.yPosition>0</cim:PositionPoint.yPosition>
+    </cim:PositionPoint>
+    <cim:Location rdf:ID="Bus2_L">
+        <cim:Location.PositionPoints rdf:resource="#Bus2_P"/>
+    </cim:Location>
+    <cim:PositionPoint rdf:ID="Bus3_P">
+        <cim:PositionPoint.xPosition>4</cim:PositionPoint.xPosition>
+        <cim:PositionPoint.yPosition>0</cim:PositionPoint.yPosition>
+    </cim:PositionPoint>
+    <cim:Location rdf:ID="Bus3_L">
+        <cim:Location.PositionPoints rdf:resource="#Bus3_P"/>
+    </cim:Location>
+
+    <cim:ConnectivityNode rdf:ID="Transformer20kV_C">
+        <cim:IdentifiedObject.mRID>Transformer20kV_C</cim:IdentifiedObject.mRID>
+        <cim:ConnectivityNode.ConnectivityNodeContainer rdf:resource="#VoltageLevel20kV"/>
+        <cim:ConnectivityNode.Terminals rdf:resource="#Transformer20kV_T"/>
+        <cim:ConnectivityNode.Terminals rdf:resource="#Industry_2_T"/>
+        <cim:ConnectivityNode.Terminals rdf:resource="#LineA_Transformer20kV_T"/>
+        <cim:ConnectivityNode.Terminals rdf:resource="#LineB_Transformer20kV_T"/>
+    </cim:ConnectivityNode>
+    <cim:BusbarSection rdf:ID="Transformer20kV">
+        <cim:IdentifiedObject.mRID>Transformer20kV</cim:IdentifiedObject.mRID>
+        <cim:IdentifiedObject.aliasName>SwingBus</cim:IdentifiedObject.aliasName>
+        <cim:PowerSystemResource.Location rdf:resource="#Transformer20kV_L"/>
+        <cim:ConductingEquipment.Terminals rdf:resource="#Transformer20kV_T"/>
+    </cim:BusbarSection>
+    <cim:Terminal rdf:ID="Transformer20kV_T">
+        <cim:IdentifiedObject.mRID>Transformer20kV_T</cim:IdentifiedObject.mRID>
+        <cim:Terminal.ConductingEquipment rdf:resource="#Transformer20kV"/>
+        <cim:Terminal.ConnectivityNode rdf:resource="#Transformer20kV_C"/>
+    </cim:Terminal>
+    <cim:EnergyConsumer rdf:ID="Industry_2">
+        <cim:IdentifiedObject.mRID>Industry_2</cim:IdentifiedObject.mRID>
+        <cim:IdentifiedObject.name>Industry 2</cim:IdentifiedObject.name>
+        <cim:ConductingEquipment.Terminals rdf:resource="#Industry_2_T"/>
+        <cim:EnergyConsumer.pfixed.value>1760</cim:EnergyConsumer.pfixed.value>
+        <!-- <cim:EnergyConsumer.pfixed.multiplier>k</cim:EnergyConsumer.pfixed.multiplier> -->
+        <cim:EnergyConsumer.qfixed.value>950</cim:EnergyConsumer.qfixed.value>
+        <!-- <cim:EnergyConsumer.qfixed.multiplier>k</cim:EnergyConsumer.qfixed.multiplier> -->
+    </cim:EnergyConsumer>
+    <cim:Terminal rdf:ID="Industry_2_T">
+        <cim:IdentifiedObject.mRID>Industry_2_T</cim:IdentifiedObject.mRID>
+        <cim:Terminal.ConductingEquipment rdf:resource="#Industry_2"/>
+        <cim:Terminal.ConnectivityNode rdf:resource="#Transformer20kV_C"/>
+    </cim:Terminal>
+
+    <cim:ConnectivityNode rdf:ID="Bus1_C">
+        <cim:IdentifiedObject.mRID>Bus1_C</cim:IdentifiedObject.mRID>
+        <cim:ConnectivityNode.ConnectivityNodeContainer rdf:resource="#VoltageLevel20kV"/>
+        <cim:ConnectivityNode.Terminals rdf:resource="#Residential_T"/>
+        <cim:ConnectivityNode.Terminals rdf:resource="#LineA_Bus1_T"/>
+        <cim:ConnectivityNode.Terminals rdf:resource="#LineD_Bus1_T"/>
+    </cim:ConnectivityNode>
+    <cim:EnergyConsumer rdf:ID="Residential">
+        <cim:IdentifiedObject.mRID>Residential</cim:IdentifiedObject.mRID>
+        <cim:IdentifiedObject.name>Residential</cim:IdentifiedObject.name>
+        <cim:PowerSystemResource.Location rdf:resource="#Bus1_L"/>
+        <cim:ConductingEquipment.Terminals rdf:resource="#Residential_T"/>
+        <cim:EnergyConsumer.pfixed.value>800</cim:EnergyConsumer.pfixed.value>
+        <!-- <cim:EnergyConsumer.pfixed.multiplier>k</cim:EnergyConsumer.pfixed.multiplier> -->
+        <cim:EnergyConsumer.qfixed.value>200</cim:EnergyConsumer.qfixed.value>
+        <!-- <cim:EnergyConsumer.qfixed.multiplier>k</cim:EnergyConsumer.qfixed.multiplier> -->
+    </cim:EnergyConsumer>
+    <cim:Terminal rdf:ID="Residential_T">
+        <cim:IdentifiedObject.mRID>Residential_T</cim:IdentifiedObject.mRID>
+        <cim:Terminal.ConductingEquipment rdf:resource="#Residential"/>
+        <cim:Terminal.ConnectivityNode rdf:resource="#Bus1_C"/>
+    </cim:Terminal>
+    <cim:EnergySource rdf:ID="PV">
+        <cim:IdentifiedObject.mRID>PV</cim:IdentifiedObject.mRID>
+        <cim:IdentifiedObject.name>PV</cim:IdentifiedObject.name>
+        <cim:EnergySource.voltageMagnitude.value>1</cim:EnergySource.voltageMagnitude.value>
+        <cim:EnergySource.voltageAngle.value>0</cim:EnergySource.voltageAngle.value>
+        <cim:EnergySource.activePower.value>200</cim:EnergySource.activePower.value>
+    </cim:EnergySource>
+    <cim:Terminal rdf:ID="PV_T">
+        <cim:IdentifiedObject.mRID>PV_T</cim:IdentifiedObject.mRID>
+        <cim:Terminal.ConductingEquipment rdf:resource="#PV"/>
+        <cim:Terminal.ConnectivityNode rdf:resource="#Bus1_C"/>
+    </cim:Terminal>
+
+    <cim:ConnectivityNode rdf:ID="Bus2_C">
+        <cim:IdentifiedObject.mRID>Bus2_C</cim:IdentifiedObject.mRID>
+        <cim:ConnectivityNode.ConnectivityNodeContainer rdf:resource="#VoltageLevel20kV"/>
+        <cim:ConnectivityNode.Terminals rdf:resource="#LineB_Bus2_T"/>
+        <cim:ConnectivityNode.Terminals rdf:resource="#LineC_Bus2_T"/>
+    </cim:ConnectivityNode>
+    <cim:GeneratingUnit rdf:ID="WEC_GU">
+        <cim:IdentifiedObject.mRID>WEC_GU</cim:IdentifiedObject.mRID>
+        <cim:IdentifiedObject.name>WEC_GU</cim:IdentifiedObject.name>
+        <cim:GeneratingUnit.initialP.value>1980</cim:GeneratingUnit.initialP.value>
+        <!-- <cim:GeneratingUnit.initialP.multiplier>k</cim:GeneratingUnit.initialP.multiplier> -->
+        <cim:GeneratingUnit.SynchronousMachines rdf:resource="#WEC"/>
+    </cim:GeneratingUnit>
+    <cim:SynchronousMachine rdf:ID="WEC">
+        <cim:IdentifiedObject.mRID>WEC</cim:IdentifiedObject.mRID>
+        <cim:IdentifiedObject.name>WEC</cim:IdentifiedObject.name>
+        <cim:PowerSystemResource.Location rdf:resource="#Bus2_L"/>
+        <cim:ConductingEquipment.Terminals rdf:resource="#WEC_T"/>
+        <cim:SynchronousMachine.baseQ.value>280</cim:SynchronousMachine.baseQ.value>
+        <!-- <cim:SynchronousMachine.baseQ.multiplier>k</cim:SynchronousMachine.baseQ.multiplier> -->
+        <cim:SynchronousMachine.operatingMode>generator</cim:SynchronousMachine.operatingMode>
+        <cim:SynchronousMachine.type>generator</cim:SynchronousMachine.type>
+        <cim:SynchronousMachine.GeneratingUnit rdf:resource="#WEC_GU"/>
+    </cim:SynchronousMachine>
+    <cim:Terminal rdf:ID="WEC_T">
+        <cim:IdentifiedObject.mRID>WEC_T</cim:IdentifiedObject.mRID>
+        <cim:Terminal.ConductingEquipment rdf:resource="#WEC"/>
+        <cim:Terminal.ConnectivityNode rdf:resource="#Bus2_C"/>
+    </cim:Terminal>
+
+    <cim:ConnectivityNode rdf:ID="Bus3_C">
+        <cim:IdentifiedObject.mRID>Bus3_C</cim:IdentifiedObject.mRID>
+        <cim:ConnectivityNode.ConnectivityNodeContainer rdf:resource="#VoltageLevel20kV"/>
+        <cim:ConnectivityNode.Terminals rdf:resource="#Industry_T"/>
+        <cim:ConnectivityNode.Terminals rdf:resource="#LineC_Bus3_T"/>
+        <cim:ConnectivityNode.Terminals rdf:resource="#LineD_Bus3_T"/>
+    </cim:ConnectivityNode>
+    <cim:EnergyConsumer rdf:ID="Industry">
+        <cim:IdentifiedObject.mRID>Industry</cim:IdentifiedObject.mRID>
+        <cim:IdentifiedObject.name>Industry</cim:IdentifiedObject.name>
+        <cim:PowerSystemResource.Location rdf:resource="#Bus3_L"/>
+        <cim:ConductingEquipment.Terminals rdf:resource="#Industry_T"/>
+        <cim:EnergyConsumer.pfixed.value>850</cim:EnergyConsumer.pfixed.value>
+        <!-- <cim:EnergyConsumer.pfixed.multiplier>k</cim:EnergyConsumer.pfixed.multiplier> -->
+        <cim:EnergyConsumer.qfixed.value>530</cim:EnergyConsumer.qfixed.value>
+        <!-- <cim:EnergyConsumer.qfixed.multiplier>k</cim:EnergyConsumer.qfixed.multiplier> -->
+    </cim:EnergyConsumer>
+    <cim:Terminal rdf:ID="Industry_T">
+        <cim:IdentifiedObject.mRID>Industry_T</cim:IdentifiedObject.mRID>
+        <cim:Terminal.ConductingEquipment rdf:resource="#Industry"/>
+        <cim:Terminal.ConnectivityNode rdf:resource="#Bus3_C"/>
+    </cim:Terminal>
+
+    <cim:Line rdf:ID="LineA_L">
+        <cim:EquipmentContainer.Equipments rdf:resource="#LineA"/>
+        <cim:IdentifiedObject.name>LineA_L</cim:IdentifiedObject.name>
+        <cim:IdentifiedObject.mRID>LineA_L</cim:IdentifiedObject.mRID>
+    </cim:Line>
+    <cim:ACLineSegment rdf:ID="LineA">
+        <cim:Conductor.length.value>5000</cim:Conductor.length.value>
+        <cim:ACLineSegment.r.value>0.625</cim:ACLineSegment.r.value>
+        <cim:ACLineSegment.x.value>0.56</cim:ACLineSegment.x.value>
+        <cim:ACLineSegment.bch.value>0.000471238898038469</cim:ACLineSegment.bch.value>
+        <cim:ConductingEquipment.Terminals rdf:resource="#LineA_Transformer20kV_T"/>
+        <cim:ConductingEquipment.Terminals rdf:resource="#LineA_Bus1_T"/>
+        <cim:IdentifiedObject.name>LineA</cim:IdentifiedObject.name>
+        <cim:IdentifiedObject.mRID>LineA</cim:IdentifiedObject.mRID>
+    </cim:ACLineSegment>
+    <cim:Terminal rdf:ID="LineA_Transformer20kV_T">
+        <cim:Terminal.ConductingEquipment rdf:resource="#LineA"/>
+        <cim:Terminal.ConnectivityNode rdf:resource="#Transformer20kV_C"/>
+        <cim:IdentifiedObject.mRID>LineA_Transformer20kV_T</cim:IdentifiedObject.mRID>
+    </cim:Terminal>
+    <cim:Terminal rdf:ID="LineA_Bus1_T">
+        <cim:Terminal.ConductingEquipment rdf:resource="#LineA"/>
+        <cim:Terminal.ConnectivityNode rdf:resource="#Bus1_C"/>
+        <cim:IdentifiedObject.mRID>LineA_Bus1_T</cim:IdentifiedObject.mRID>
+    </cim:Terminal>
+
+    <cim:Line rdf:ID="LineB_L">
+        <cim:EquipmentContainer.Equipments rdf:resource="#LineB"/>
+        <cim:IdentifiedObject.name>LineB_L</cim:IdentifiedObject.name>
+        <cim:IdentifiedObject.mRID>LineB_L</cim:IdentifiedObject.mRID>
+    </cim:Line>
+    <cim:ACLineSegment rdf:ID="LineB">
+        <cim:Conductor.length.value>3000</cim:Conductor.length.value>
+        <cim:ACLineSegment.r.value>0.375</cim:ACLineSegment.r.value>
+        <cim:ACLineSegment.x.value>0.336</cim:ACLineSegment.x.value>
+        <cim:ACLineSegment.bch.value>0.00028274333882308137</cim:ACLineSegment.bch.value>
+        <cim:ConductingEquipment.Terminals rdf:resource="#LineB_Transformer20kV_T"/>
+        <cim:ConductingEquipment.Terminals rdf:resource="#LineB_Bus2_T"/>
+        <cim:IdentifiedObject.name>LineB</cim:IdentifiedObject.name>
+        <cim:IdentifiedObject.mRID>LineB</cim:IdentifiedObject.mRID>
+    </cim:ACLineSegment>
+    <cim:Terminal rdf:ID="LineB_Transformer20kV_T">
+        <cim:Terminal.ConductingEquipment rdf:resource="#LineB"/>
+        <cim:Terminal.ConnectivityNode rdf:resource="#Transformer20kV_C"/>
+        <cim:IdentifiedObject.mRID>LineB_Transformer20kV_T</cim:IdentifiedObject.mRID>
+    </cim:Terminal>
+    <cim:Terminal rdf:ID="LineB_Bus2_T">
+        <cim:Terminal.ConductingEquipment rdf:resource="#LineB"/>
+        <cim:Terminal.ConnectivityNode rdf:resource="#Bus2_C"/>
+        <cim:IdentifiedObject.mRID>LineB_Bus2_T</cim:IdentifiedObject.mRID>
+    </cim:Terminal>
+
+    <cim:Line rdf:ID="LineC_L">
+        <cim:EquipmentContainer.Equipments rdf:resource="#LineC"/>
+        <cim:IdentifiedObject.name>LineC_L</cim:IdentifiedObject.name>
+        <cim:IdentifiedObject.mRID>LineC_L</cim:IdentifiedObject.mRID>
+    </cim:Line>
+    <cim:ACLineSegment rdf:ID="LineC">
+        <cim:Conductor.length.value>300</cim:Conductor.length.value>
+        <cim:ACLineSegment.r.value>0.0375</cim:ACLineSegment.r.value>
+        <cim:ACLineSegment.x.value>0.0336</cim:ACLineSegment.x.value>
+        <cim:ACLineSegment.bch.value>2.8274333882308137e-05</cim:ACLineSegment.bch.value>
+        <cim:ConductingEquipment.Terminals rdf:resource="#LineC_Bus2_T"/>
+        <cim:ConductingEquipment.Terminals rdf:resource="#LineC_Bus3_T"/>
+        <cim:IdentifiedObject.name>LineC</cim:IdentifiedObject.name>
+        <cim:IdentifiedObject.mRID>LineC</cim:IdentifiedObject.mRID>
+    </cim:ACLineSegment>
+    <cim:Terminal rdf:ID="LineC_Bus2_T">
+        <cim:Terminal.ConductingEquipment rdf:resource="#LineC"/>
+        <cim:Terminal.ConnectivityNode rdf:resource="#Bus2_C"/>
+        <cim:IdentifiedObject.mRID>LineC_Bus2_T</cim:IdentifiedObject.mRID>
+    </cim:Terminal>
+    <cim:Terminal rdf:ID="LineC_Bus3_T">
+        <cim:Terminal.ConductingEquipment rdf:resource="#LineC"/>
+        <cim:Terminal.ConnectivityNode rdf:resource="#Bus3_C"/>
+        <cim:IdentifiedObject.mRID>LineC_Bus3_T</cim:IdentifiedObject.mRID>
+    </cim:Terminal>
+
+    <cim:Line rdf:ID="LineD_L">
+        <cim:EquipmentContainer.Equipments rdf:resource="#LineD"/>
+        <cim:IdentifiedObject.name>LineD_L</cim:IdentifiedObject.name>
+        <cim:IdentifiedObject.mRID>LineD_L</cim:IdentifiedObject.mRID>
+    </cim:Line>
+    <cim:ACLineSegment rdf:ID="LineD">
+        <cim:Conductor.length.value>2000</cim:Conductor.length.value>
+        <cim:ACLineSegment.r.value>0.25</cim:ACLineSegment.r.value>
+        <cim:ACLineSegment.x.value>0.224</cim:ACLineSegment.x.value>
+        <cim:ACLineSegment.bch.value>0.0001884955592153876</cim:ACLineSegment.bch.value>
+        <cim:ConductingEquipment.Terminals rdf:resource="#LineD_Bus1_T"/>
+        <cim:ConductingEquipment.Terminals rdf:resource="#LineD_Bus3_T"/>
+        <cim:IdentifiedObject.name>LineD</cim:IdentifiedObject.name>
+        <cim:IdentifiedObject.mRID>LineD</cim:IdentifiedObject.mRID>
+    </cim:ACLineSegment>
+    <cim:Terminal rdf:ID="LineD_Bus1_T">
+        <cim:Terminal.ConductingEquipment rdf:resource="#LineD"/>
+        <cim:Terminal.ConnectivityNode rdf:resource="#Bus1_C"/>
+        <cim:IdentifiedObject.mRID>LineD_Bus1_T</cim:IdentifiedObject.mRID>
+    </cim:Terminal>
+    <cim:Terminal rdf:ID="LineD_Bus3_T">
+        <cim:Terminal.ConductingEquipment rdf:resource="#LineD"/>
+        <cim:Terminal.ConnectivityNode rdf:resource="#Bus3_C"/>
+        <cim:IdentifiedObject.mRID>LineD_Bus3_T</cim:IdentifiedObject.mRID>
+    </cim:Terminal>
+</rdf:RDF>

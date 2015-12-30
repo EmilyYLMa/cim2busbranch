@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This example is taken from A. McMorran: An Introduction to IEC 61970-301 & 61968-11: The Common Information Model, 2007. -->
+<rdf:RDF xmlns:cim="http://iec.ch/TC57/2009/CIM-schema-cim14#"
+        xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+
+    <cim:BasePower rdf:ID="BasePower">
+        <cim:BasePower.basePower>1</cim:BasePower.basePower>
+    </cim:BasePower>
+
+    <cim:BaseVoltage rdf:ID="BaseVoltage17kV">
+        <cim:BaseVoltage.nominalVoltage>17</cim:BaseVoltage.nominalVoltage>
+    </cim:BaseVoltage>
+    <cim:BaseVoltage rdf:ID="BaseVoltage33kV">
+        <cim:BaseVoltage.nominalVoltage>33</cim:BaseVoltage.nominalVoltage>
+    </cim:BaseVoltage>
+    <cim:BaseVoltage rdf:ID="BaseVoltage132kV">
+        <cim:BaseVoltage.nominalVoltage>132</cim:BaseVoltage.nominalVoltage>
+    </cim:BaseVoltage>
+
+    <cim:Line rdf:ID="Line">
+        <cim:IdentifiedObject.mRID>Line</cim:IdentifiedObject.mRID>
+    </cim:Line>
+    <cim:Substation rdf:ID="Substation">
+        <cim:IdentifiedObject.mRID>Substation</cim:IdentifiedObject.mRID>
+    </cim:Substation>
+
+    <!-- Line & Load-->
+    <cim:VoltageLevel rdf:ID="VoltageLevel132kV_2">
+        <cim:IdentifiedObject.mRID>VoltageLevel132kV_2</cim:IdentifiedObject.mRID>
+        <cim:VoltageLevel.Substation rdf:resource="#Substation"/>
+        <cim:VoltageLevel.BaseVoltage rdf:resource="#BaseVoltage132kV"/>
+    </cim:VoltageLevel>
+
+    <cim:ACLineSegment rdf:ID="ACLine">
+        <cim:IdentifiedObject.mRID>ACLine</cim:IdentifiedObject.mRID>
+        <cim:Equipment.EquipmentContainer rdf:resource="#Line"/>
+        <cim:Conductor.length>2000</cim:Conductor.length>
+        <cim:ACLineSegment.r>0.25</cim:ACLineSegment.r>
+        <cim:ACLineSegment.x>0.224</cim:ACLineSegment.x>
+        <cim:ACLineSegment.bch.value>0.0001884955592153876</cim:ACLineSegment.bch.value>
+        <cim:ConductingEquipment.Terminals rdf:resource="#ACLine_Load_T"/>
+        <cim:ConductingEquipment.Terminals rdf:resource="#ACLine_Subs_T"/>
+    </cim:ACLineSegment>
+    <cim:Terminal rdf:ID="ACLine_Load_T">
+        <cim:IdentifiedObject.mRID>ACLine_Load_T</cim:IdentifiedObject.mRID>
+    </cim:Terminal>
+    <cim:Terminal rdf:ID="ACLine_Subs_T">
+        <cim:IdentifiedObject.mRID>ACLine_Subs_T</cim:IdentifiedObject.mRID>
+    </cim:Terminal>
+
+    <cim:EnergyConsumer rdf:ID="LoadB">
+        <cim:IdentifiedObject.mRID>LoadB</cim:IdentifiedObject.mRID>
+        <cim:ConductingEquipment.Terminals rdf:resource="#LoadB_T"/>
+        <cim:EnergyConsumer.pfixed>100</cim:EnergyConsumer.pfixed>
+        <cim:EnergyConsumer.qfixed>20</cim:EnergyConsumer.qfixed>
+    </cim:EnergyConsumer>
+    <cim:Terminal rdf:ID="LoadB_T">
+        <cim:IdentifiedObject.mRID>LoadB_T</cim:IdentifiedObject.mRID>
+    </cim:Terminal>
+
+    <cim:ConnectivityNode rdf:ID="LoadB_C">
+        <cim:IdentifiedObject.mRID>LoadB_C</cim:IdentifiedObject.mRID>
+        <cim:ConnectivityNode.ConnectivityNodeContainer rdf:resource="#VoltageLevel132kV_2"/>
+        <cim:ConnectivityNode.Terminals rdf:resource="#LoadB_T"/>
+        <cim:ConnectivityNode.Terminals rdf:resource="#ACLine_T"/>
+    </cim:ConnectivityNode>
+
+    <!-- Substation -->
+    <cim:VoltageLevel rdf:ID="VoltageLevel17kV">
+        <cim:IdentifiedObject.mRID>VoltageLevel17kV</cim:IdentifiedObject.mRID>
+        <cim:VoltageLevel.Substation rdf:resource="#Substation"/>
+        <cim:VoltageLevel.BaseVoltage rdf:resource="#BaseVoltage17kV"/>
+    </cim:VoltageLevel>
+    <cim:VoltageLevel rdf:ID="VoltageLevel33kV">
+        <cim:IdentifiedObject.mRID>VoltageLevel33kV</cim:IdentifiedObject.mRID>
+        <cim:VoltageLevel.Substation rdf:resource="#Substation"/>
+        <cim:VoltageLevel.BaseVoltage rdf:resource="#BaseVoltage33kV"/>
+    </cim:VoltageLevel>
+    <cim:VoltageLevel rdf:ID="VoltageLevel132kV">
+        <cim:IdentifiedObject.mRID>VoltageLevel132kV</cim:IdentifiedObject.mRID>
+        <cim:VoltageLevel.Substation rdf:resource="#Substation"/>
+        <cim:VoltageLevel.BaseVoltage rdf:resource="#BaseVoltage132kV"/>
+    </cim:VoltageLevel>
+
+    <!-- VoltageLevel 17kV -->
+    <cim:GeneratingUnit rdf:ID="GenAlphaGU">
+        <cim:IdentifiedObject.mRID>GenAlphaGU</cim:IdentifiedObject.mRID>
+        <cim:GeneratingUnit.baseP>1.980</cim:GeneratingUnit.baseP>
+        <cim:GeneratingUnit.SynchronousMachines rdf:resource="#GenAlpha"/>
+    </cim:GeneratingUnit>
+    <cim:SynchronousMachine rdf:ID="GenAlpha">
+        <cim:IdentifiedObject.mRID>GenAlpha</cim:IdentifiedObject.mRID>
+        <cim:SynchronousMachine.baseQ>.280</cim:SynchronousMachine.baseQ>
+        <cim:SynchronousMachine.operatingMode>generator</cim:SynchronousMachine.operatingMode>
+        <cim:SynchronousMachine.type>generator</cim:SynchronousMachine.type>
+        <cim:ConductingEquipment.Terminals rdf:resource="#GenAlpha_T"/>
+    </cim:SynchronousMachine>
+    <cim:Terminal rdf:ID="GenAlpha_T">
+        <cim:IdentifiedObject.mRID>GenAlpha_T</cim:IdentifiedObject.mRID>
+    </cim:Terminal>
+
+    <cim:ConnectivityNode rdf:ID="GenAlpha_C">
+        <cim:IdentifiedObject.mRID>GenAlpha_C</cim:IdentifiedObject.mRID>
+        <cim:ConnectivityNode.ConnectivityNodeContainer rdf:resource="#VoltageLevel132kV"/>
+        <cim:ConnectivityNode.Terminals rdf:resource="#GenAlpha_T"/>
+        <cim:ConnectivityNode.Terminals rdf:resource="#Breaker17kV_T1"/>
+    </cim:ConnectivityNode>
+
+    <cim:Terminal rdf:ID="Breaker17kV_T1">
+        <cim:IdentifiedObject.mRID>Breaker17kV_T1</cim:IdentifiedObject.mRID>
+    </cim:Terminal>
+    <cim:Breaker rdf:ID="Breaker17kV">
+        <cim:IdentifiedObject.mRID>Breaker17kV</cim:IdentifiedObject.mRID>
+        <cim:ConductingEquipment.Terminals rdf:resource="#Breaker17kV_T1"/>
+        <cim:ConductingEquipment.Terminals rdf:resource="#Breaker17kV_T2"/>
+    </cim:Breaker>
+    <cim:Terminal rdf:ID="Breaker17kV_T2">
+        <cim:IdentifiedObject.mRID>Breaker17kV_T2</cim:IdentifiedObject.mRID>
+    </cim:Terminal>
+    <cim:Measurement rdf:ID="Measurement">
+        <cim:IdentifiedObject.mRID>Measurement</cim:IdentifiedObject.mRID>
+        <cim:Measurement.Terminal rdf:resource="#Breaker17kV_T2"/>
+    </cim:Measurement>
+
+    <cim:ConnectivityNode rdf:ID="Busbar17kV_C">
+        <cim:IdentifiedObject.mRID>Busbar17kV_C</cim:IdentifiedObject.mRID>
+        <cim:ConnectivityNode.ConnectivityNodeContainer rdf:resource="#VoltageLevel132kV"/>
+        <cim:ConnectivityNode.Terminals rdf:resource="#Breaker17kV_T2"/>
+        <cim:ConnectivityNode.Terminals rdf:resource="#Busbar17kV_T"/>
+        <cim:ConnectivityNode.Terminals rdf:resource="#PT_1733_W1_T"/>
+        <cim:ConnectivityNode.Terminals rdf:resource="#PT_17132_W1_T"/>
+    </cim:ConnectivityNode>
+
+    <cim:BusbarSection rdf:ID="Busbar17kV">
+        <cim:IdentifiedObject.mRID>Busbar17kV</cim:IdentifiedObject.mRID>
+        <cim:IdentifiedObject.aliasName>SwingBus</cim:IdentifiedObject.aliasName>
+        <cim:ConductingEquipment.Terminals rdf:resource="#Busbar17kV_T"/>
+    </cim:BusbarSection>
+    <cim:Terminal rdf:ID="Busbar17kV_T">
+        <cim:IdentifiedObject.mRID>Busbar17kV_T</cim:IdentifiedObject.mRID>
+    </cim:Terminal>
+
+    <!-- Transformer 17-33 -->
+    <cim:PowerTransformer rdf:ID="PowerTransformer_1733">
+        <cim:IdentifiedObject.mRID>PowerTransformer_1733</cim:IdentifiedObject.mRID>
+    </cim:PowerTransformer>
+
+    <cim:TransformerWinding rdf:ID="PT_1733_W1">
+        <cim:IdentifiedObject.mRID>PT_1733_W1</cim:IdentifiedObject.mRID>
+        <cim:TransformerWinding.b>0</cim:TransformerWinding.b>
+        <cim:TransformerWinding.r>0.099187</cim:TransformerWinding.r>
+        <cim:TransformerWinding.x>4.701487</cim:TransformerWinding.x>
+        <cim:TransformerWinding.ratedKV>115.00</cim:TransformerWinding.ratedKV>
+        <cim:TransformerWinding.windingType rdf:resource="http://iec.ch/TC57/2009/CIM-schema-cim14#WindingType.primary"/>
+        <cim:TransformerWinding.PowerTransformer rdf:resource="#PowerTransformer_1733"/>
+        <cim:ConductingEquipment.Terminals rdf:resource="#PT_1733_W1_T"/>
+    </cim:TransformerWinding>
+    <cim:TabChanger rdf:ID="TapChanger_PT_1733">
+        <cim:IdentifiedObject.mRID>TapChanger_PT_1733</cim:IdentifiedObject.mRID>
+        <cim:TapChanger.highStep>20</cim:TapChanger.highStep>
+        <cim:TapChanger.lowStep>-20</cim:TapChanger.lowStep>
+        <cim:TapChanger.neutralKV>115.00</cim:TapChanger.neutralKV>
+        <cim:TapChanger.neutralStep>0</cim:TapChanger.neutralStep>
+        <cim:TapChanger.normalStep>0</cim:TapChanger.normalStep>
+        <cim:TapChanger.stepVoltageIncrement>0.641</cim:TapChanger.stepVoltageIncrement>
+        <cim:TapChanger.tculControlMode rdf:resource="http://iec.ch/TC57/2003/CIM- schema-cim10#TransformerControlMode.volt"/>
+        <cim:TapChanger.TransformerWinding
+rdf:resource="#PT_1733_W1"/>
+    </cim:TabChanger>
+    <cim:Terminal rdf:ID="PT_1733_W1_T">
+        <cim:IdentifiedObject.mRID>PT_1733_W1_T</cim:IdentifiedObject.mRID>
+    </cim:Terminal>
+
+    <cim:TransformerWinding rdf:ID="PT_1733_W2">
+        <cim:IdentifiedObject.mRID>PT_1733_W2</cim:IdentifiedObject.mRID>
+        <cim:TransformerWinding.b>0</cim:TransformerWinding.b>
+        <cim:TransformerWinding.r>0.39675</cim:TransformerWinding.r>
+        <cim:TransformerWinding.x>18.80595</cim:TransformerWinding.x>
+        <cim:TransformerWinding.ratedKV>230.00</cim:TransformerWinding.ratedKV>
+        <cim:TransformerWinding.windingType rdf:resource="http://iec.ch/TC57/2009/CIM-schema-cim14#WindingType.secondary"/>
+        <cim:TransformerWinding.PowerTransformer rdf:resource="#PowerTransformer_1733"/>
+        <cim:ConductingEquipment.Terminals rdf:resource="#PT_1733_W2_T"/>
+    </cim:TransformerWinding>
+    <cim:Terminal rdf:ID="PT_1733_W2_T">
+        <cim:IdentifiedObject.mRID>PT_1733_W2_T</cim:IdentifiedObject.mRID>
+    </cim:Terminal>
+
+    <!-- Transformer 17-132 -->
+    <cim:PowerTransformer rdf:ID="PowerTransformer_17132">
+        <cim:IdentifiedObject.mRID>PowerTransformer_17132</cim:IdentifiedObject.mRID>
+    </cim:PowerTransformer>
+
+    <cim:TransformerWinding rdf:ID="PT_17132_W1">
+        <cim:IdentifiedObject.mRID>PT_17132_W1</cim:IdentifiedObject.mRID>
+        <cim:TransformerWinding.b>0</cim:TransformerWinding.b>
+        <cim:TransformerWinding.r>0.099187</cim:TransformerWinding.r>
+        <cim:TransformerWinding.x>4.701487</cim:TransformerWinding.x>
+        <cim:TransformerWinding.ratedKV>115.00</cim:TransformerWinding.ratedKV>
+        <cim:TransformerWinding.windingType rdf:resource="http://iec.ch/TC57/2009/CIM-schema-cim14#WindingType.primary"/>
+        <cim:TransformerWinding.PowerTransformer rdf:resource="#PowerTransformer_17132"/>
+        <cim:ConductingEquipment.Terminals rdf:resource="#PT_17132_W1_T"/>
+    </cim:TransformerWinding>
+    <cim:TabChanger rdf:ID="TapChanger_PT_17132">
+        <cim:IdentifiedObject.mRID>TapChanger_PT_17132</cim:IdentifiedObject.mRID>
+        <cim:TapChanger.highStep>20</cim:TapChanger.highStep>
+        <cim:TapChanger.lowStep>-20</cim:TapChanger.lowStep>
+        <cim:TapChanger.neutralKV>115.00</cim:TapChanger.neutralKV>
+        <cim:TapChanger.neutralStep>0</cim:TapChanger.neutralStep>
+        <cim:TapChanger.normalStep>0</cim:TapChanger.normalStep>
+        <cim:TapChanger.stepVoltageIncrement>0.641</cim:TapChanger.stepVoltageIncrement>
+        <cim:TapChanger.tculControlMode rdf:resource="http://iec.ch/TC57/2003/CIM- schema-cim10#TransformerControlMode.volt"/>
+        <cim:TapChanger.TransformerWinding
+rdf:resource="#PT_17132_W1"/>
+    </cim:TabChanger>
+    <cim:Terminal rdf:ID="PT_17132_W1_T">
+        <cim:IdentifiedObject.mRID>PT_17132_W1_T</cim:IdentifiedObject.mRID>
+    </cim:Terminal>
+
+    <cim:TransformerWinding rdf:ID="PT_17132_W2">
+        <cim:IdentifiedObject.mRID>PT_17132_W2</cim:IdentifiedObject.mRID>
+        <cim:TransformerWinding.b>0</cim:TransformerWinding.b>
+        <cim:TransformerWinding.r>0.39675</cim:TransformerWinding.r>
+        <cim:TransformerWinding.x>18.80595</cim:TransformerWinding.x>
+        <cim:TransformerWinding.ratedKV>230.00</cim:TransformerWinding.ratedKV>
+        <cim:TransformerWinding.windingType rdf:resource="http://iec.ch/TC57/2009/CIM-schema-cim14#WindingType.secondary"/>
+        <cim:TransformerWinding.PowerTransformer rdf:resource="#PowerTransformer_17132"/>
+        <cim:ConductingEquipment.Terminals rdf:resource="#PT_17132_W2_T"/>
+    </cim:TransformerWinding>
+    <cim:Terminal rdf:ID="PT_17132_W2_T">
+        <cim:IdentifiedObject.mRID>PT_17132_W2_T</cim:IdentifiedObject.mRID>
+    </cim:Terminal>
+
+    <!-- VoltageLevel 33kV -->
+    <cim:EnergyConsumer rdf:ID="LoadA">
+        <cim:IdentifiedObject.mRID>LoadA</cim:IdentifiedObject.mRID>
+        <cim:ConductingEquipment.Terminals rdf:resource="#LoadA_T"/>
+        <cim:EnergyConsumer.pfixed>10</cim:EnergyConsumer.pfixed>
+        <cim:EnergyConsumer.qfixed>50</cim:EnergyConsumer.qfixed>
+    </cim:EnergyConsumer>
+    <cim:Terminal rdf:ID="LoadA_T">
+        <cim:IdentifiedObject.mRID>LoadA_T</cim:IdentifiedObject.mRID>
+    </cim:Terminal>
+
+    <cim:ConnectivityNode rdf:ID="LoadA_C">
+        <cim:IdentifiedObject.mRID>LoadA_C</cim:IdentifiedObject.mRID>
+        <cim:ConnectivityNode.ConnectivityNodeContainer rdf:resource="#VoltageLevel33kV"/>
+        <cim:ConnectivityNode.Terminals rdf:resource="#LoadA_T"/>
+        <cim:ConnectivityNode.Terminals rdf:resource="#Breaker33kV_T1"/>
+    </cim:ConnectivityNode>
+
+    <cim:Terminal rdf:ID="Breaker33kV_T1">
+        <cim:IdentifiedObject.mRID>Breaker33kV_T1</cim:IdentifiedObject.mRID>
+    </cim:Terminal>
+    <cim:Breaker rdf:ID="Breaker33kV">
+        <cim:IdentifiedObject.mRID>Breaker17kV</cim:IdentifiedObject.mRID>
+        <cim:ConductingEquipment.Terminals rdf:resource="#Breaker33kV_T1"/>
+        <cim:ConductingEquipment.Terminals rdf:resource="#Breaker33kV_T2"/>
+    </cim:Breaker>
+    <cim:Terminal rdf:ID="Breaker33kV_T2">
+        <cim:IdentifiedObject.mRID>Breaker33kV_T2</cim:IdentifiedObject.mRID>
+    </cim:Terminal>
+
+    <cim:ConnectivityNode rdf:ID="VL33kV_C">
+        <cim:IdentifiedObject.mRID>VL33kV_C</cim:IdentifiedObject.mRID>
+        <cim:ConnectivityNode.ConnectivityNodeContainer rdf:resource="#VoltageLevel33kV"/>
+        <cim:ConnectivityNode.Terminals rdf:resource="#Breaker33kV_T2"/>
+        <cim:ConnectivityNode.Terminals rdf:resource="#PT_1733_W2_T"/>
+    </cim:ConnectivityNode>
+
+    <!-- VoltageLevel 132kV -->
+    <cim:ConnectivityNode rdf:ID="ACLine_C">
+        <cim:IdentifiedObject.mRID>ACLine_C</cim:IdentifiedObject.mRID>
+        <cim:ConnectivityNode.ConnectivityNodeContainer rdf:resource="#VoltageLevel132kV"/>
+        <cim:ConnectivityNode.Terminals rdf:resource="#ACLine_Subs_T"/>
+        <cim:ConnectivityNode.Terminals rdf:resource="#Breaker132kV_T1"/>
+    </cim:ConnectivityNode>
+
+    <cim:Terminal rdf:ID="Breaker132kV_T1">
+        <cim:IdentifiedObject.mRID>Breaker132kV_T1</cim:IdentifiedObject.mRID>
+    </cim:Terminal>
+    <cim:Breaker rdf:ID="Breaker132kV">
+        <cim:IdentifiedObject.mRID>Breaker17kV</cim:IdentifiedObject.mRID>
+        <cim:ConductingEquipment.Terminals rdf:resource="#Breaker132kV_T1"/>
+        <cim:ConductingEquipment.Terminals rdf:resource="#Breaker132kV_T2"/>
+    </cim:Breaker>
+    <cim:Terminal rdf:ID="Breaker132kV_T2">
+        <cim:IdentifiedObject.mRID>Breaker132kV_T2</cim:IdentifiedObject.mRID>
+    </cim:Terminal>
+
+    <cim:ConnectivityNode rdf:ID="VL132kV_C">
+        <cim:IdentifiedObject.mRID>VL132kV_C</cim:IdentifiedObject.mRID>
+        <cim:ConnectivityNode.ConnectivityNodeContainer rdf:resource="#VoltageLevel132kV"/>
+        <cim:ConnectivityNode.Terminals rdf:resource="#Breaker132kV_T2"/>
+        <cim:ConnectivityNode.Terminals rdf:resource="#PT_17132_W2_T"/>
+    </cim:ConnectivityNode>
+</rdf:RDF>

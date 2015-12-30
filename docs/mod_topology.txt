@@ -1,0 +1,45 @@
+.. _mod_topology:
+
+====================================
+Working with the bus/branch topology
+====================================
+
+.. currentmodule:: cim2busbranch.topology
+
+Cim2BusBranch does not create PYPOWER cases directly, but uses :class:`Bus`,
+:class:`Branch` and :class:`Generator` objects contained within a
+:class:`Case` as an intermediary step.
+
+This makes it easier to work with if you need the same case for more than one
+calculation, e.g. during a simulation. This makes it also easier to use another
+tool than PYPOWER to performe the load flow analysis.
+
+The attributes of :class:`Bus`, :class:`Generator` and :class:`Branch` can
+freely be modified. *Bus* and *Generator* also keep a backup of their original
+values for demanded or supplied active and reactive power (*pd*, *qd* and *pg*,
+*qg* respectively). If you use Cim2BusBranch during a simulation, you can add
+the demand (or generation) of external sources to a bus or generator and reset
+them to their original values (read from the CIM file) after each step.
+
+Here is an example how this works:
+
+    >>> from cim2busbranch.topology import Bus
+    >>> bus = Bus(pd=2, qd=1)
+    >>> bus.pd
+    2
+    >>> bus.pd += 2
+    >>> bus.pd
+    4
+    >>> bus.pd_orig
+    2
+    >>> bus.pd_orig = 3
+    AttributeError: can't set attribute
+    >>> bus.reset()
+    >>> bus.pd
+    2
+    >>> bus.pd = 5
+    >>> bus.pd
+    5
+
+The reference material points out which attributes exactly can be reset. The
+method :meth:`Case.reset` resets all buses and generators within that case.

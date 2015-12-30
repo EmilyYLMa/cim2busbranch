@@ -1,0 +1,6 @@
+=======
+Authors
+=======
+
+Cim2BusBranch was started in 2011 and is maintained by Stefan Scherfke, who
+can be found online at http://stefan.sofa-rockers.org/.
