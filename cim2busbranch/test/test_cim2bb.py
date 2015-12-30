@@ -129,8 +129,8 @@ def test_create_buses(converter, results):
             (b.name, b.btype, b.pd, b.qd, b.vm, b.va, b.cim_classes, b.pos)
                 for b in buses.values()
         ])
-    print data
-    print results['bus_attr']
+    print (data)
+    print (results['bus_attr'])
     assert data == results['bus_attr']
 
     assert gens == {}

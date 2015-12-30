@@ -19,6 +19,7 @@ __version__ = '0.1'
 logger = getLogger('cim2pylon')
 
 
+
 def transform(cim):
     """
     Transforms a CIM topology into the bus/branch model and returns a
@@ -28,6 +29,7 @@ def transform(cim):
     the topology.
 
     """
+    basestring = (str,bytes)
     from cim2busbranch import cim2bb
 
     if isinstance(cim, basestring):
@@ -35,6 +37,7 @@ def transform(cim):
         cim = PyCIM.cimread(cim)
 
     return cim2bb.transform(cim)
+    
 
 
 def run_pypower(case):
@@ -46,6 +49,7 @@ def run_pypower(case):
     a bus/branch model from the CIM file.
 
     """
+    basestring = (str,bytes)
     from pypower.api import ppoption, runpf
     from cim2busbranch import ext_pypower
 
